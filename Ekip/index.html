@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Page Web Dynamique</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1>Page Web Interactive & Dynamique</h1>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>Horloge Temps Réel</h2>
+            <div id="horloge">00:00:00</div>
+        </div>
+
+        <div class="section">
+            <h2>Interactions</h2>
+            <div class="stats">
+                <div class="stat-box">
+                    <h3>Compteur de Clics</h3>
+                    <p id="compteur">0</p>
+                    <button class="btn btn-primary" onclick="incrementerCompteur()">Cliquer</button>
+                </div>
+                <div class="stat-box">
+                    <h3>Progression</h3>
+                    <div id="progressBar">
+                        <div id="progressFill"></div>
+                    </div>
+                    <button class="btn btn-secondary" onclick="augmenterProgression()">Progresser</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Personnalisation</h2>
+            <label for="colorPicker">Choisir une couleur de fond :</label>
+            <input type="color" id="colorPicker" onchange="changerCouleurPersonnalisee()">
+            <button class="btn btn-primary" onclick="changerCouleurAleatoire()">Couleur Aléatoire</button>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
