@@ -1,0 +1,22 @@
+# 📁 .github/workflows/check-site.yml
+
+name: Vérifier les fichiers HTML/CSS/JS
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧾 Cloner le dépôt
+        uses: actions/checkout@v3
+
+      - name: ✅ Vérifier les fichiers attendus
+        run: |
+          test -f index.html && echo "✅ index.html trouvé"
+          test -f index.css && echo "✅ index.css trouvé"
+          test -f index.js && echo "✅ index.js trouvé"
+          test -d Ekip && echo "✅ dossier Ekip/ trouvé"
