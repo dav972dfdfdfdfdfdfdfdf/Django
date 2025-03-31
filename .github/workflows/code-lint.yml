@@ -1,0 +1,38 @@
+name: Vérification HTML, CSS et JS
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔽 Cloner le dépôt
+        uses: actions/checkout@v3
+
+      - name: 🧪 Valider HTML avec htmlhint
+        run: |
+          npm install -g htmlhint
+          htmlhint index.html || echo "💥 Erreurs HTML trouvées"
+
+      - name: 🎨 Vérifier CSS avec stylelint
+        run: |
+          npm install -g stylelint stylelint-config-standard
+          echo '{ "extends": "stylelint-config-standard" }' > .stylelintrc.json
+          stylelint "**/*.css" || echo "💥 Erreurs CSS trouvées"
+
+      - name: 🧠 Vérifier JS avec eslint
+        run: |
+          npm install -g eslint
+          eslint --init <<EOF
+          no
+          javascript
+          modules
+          none
+          no
+          browser
+          no
+          EOF
+          eslint index.js || echo "💥 Erreurs JS trouvées"
