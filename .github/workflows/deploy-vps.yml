@@ -15,10 +15,20 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: 🚀 Se connecter au VPS et déployer
+      - name: 🛠 Debug SSH vers VPS
         run: |
-          ssh -o StrictHostKeyChecking=no louisy@TON_IP_VPS "
-            cd ~/Django &&
-            git pull origin main &&
-            echo '✅ Projet mis à jour sur le VPS !'
+          echo "Connexion SSH vers VPS..."
+          ssh -o StrictHostKeyChecking=no louisy@37.187.236.58 "
+            echo '🔑 Connexion SSH réussie'
+            echo '👤 Utilisateur :' \$(whoami)
+            echo '📍 Emplacement :' \$(pwd)
+            echo '🖥️ Nom de machine :' \$(hostname)
+
+            echo '📂 Aller dans ~/Django'
+            cd ~/Django || { echo '❌ Dossier Django introuvable'; exit 1; }
+
+            echo '📥 Faire un git pull'
+            git pull origin main || { echo '❌ git pull échoué'; exit 1; }
+
+            echo '✅ Déploiement terminé avec succès sur le VPS !'
           "
