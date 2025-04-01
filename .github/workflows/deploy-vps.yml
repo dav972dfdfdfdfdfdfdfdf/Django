@@ -1,0 +1,24 @@
+name: 🚀 Déploiement automatique sur VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔐 Configurer la clé SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: 🚀 Se connecter au VPS et déployer
+        run: |
+          ssh -o StrictHostKeyChecking=no louisy@TON_IP_VPS "
+            cd ~/Django &&
+            git pull origin main &&
+            echo '✅ Projet mis à jour sur le VPS !'
+          "
